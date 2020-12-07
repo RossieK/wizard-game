@@ -4,6 +4,10 @@ body {
     font-weight: bold;
 }
 
+.hide {
+    display: none;
+}
+
 .game-area {
     position: relative;
     background-color: lightskyblue;
@@ -23,7 +27,7 @@ body {
     left: 25%
 }
 
-.score {
+.game-score {
     background-color: grey;
     font-size: 18px;
     text-align: right;
