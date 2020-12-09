@@ -8,26 +8,51 @@ document.addEventListener('keydown', onKeyDown);
 document.addEventListener('keyup', onKeyUp);
 
 let keys = {};
+let player = {
+    x: 150,
+    y: 300
+};
+let game = {
+    speed: 2
+};
 
 function onGameStart() {
     gameStart.classList.add('hide');
     const wizard = document.createElement("div");
     wizard.classList.add('wizard');
-    wizard.style.top = '200px';
-    wizard.style.left = '300px';
+    wizard.style.top = player.y + 'px';
+    wizard.style.left = player.x + 'px';
     gameArea.appendChild(wizard);
 
     window.requestAnimationFrame(gameAction);
 }
 
 function gameAction() {
+    const wizard = document.querySelector('.wizard');
+
+    if (keys.ArrowUp) {
+        player.y -= game.speed;
+        wizard.style.top = player.y + 'px';
+    }
+
+    if (keys.ArrowDown) {
+
+    }
+
+    if (keys.ArrowLeft) {
+
+    }
+
+    if (keys.ArrowRight) {
+
+    }
+
     window.requestAnimationFrame(gameAction);
 }
 
 function onKeyDown(e) {
     e.preventDefault();
     keys[e.code] = true;
-    console.log(keys);
 }
 
 function onKeyUp(e) {
