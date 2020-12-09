@@ -34,26 +34,32 @@ function onGameStart() {
 function gameAction() {
     const wizard = document.querySelector('.wizard');
 
-    if (keys.ArrowUp && player.y > 0) {
-        player.y -= game.speed * game.movingMultiplier;
-        wizard.style.top = player.y + 'px';
+    //apply gravitation
+    let isInAir = (player.y + player.height) <= gameArea.offsetHeight;
+    if (isInAir) {
+        player.y += game.speed;
     }
 
-    if (keys.ArrowDown && player.y + player.height < gameArea.offsetHeight) {
+    // register user input 
+
+    if (keys.ArrowUp && player.y > 0) {
+        player.y -= game.speed * game.movingMultiplier;
+    }
+
+    if (keys.ArrowDown && isInAir) {
         player.y += game.speed * game.movingMultiplier;
-        wizard.style.top = player.y + 'px';
     }
 
     if (keys.ArrowLeft && player.x > 0) {
         player.x -= game.speed * game.movingMultiplier;
-        wizard.style.left = player.x + 'px';
     }
 
     if (keys.ArrowRight && player.x + player.width < gameArea.offsetWidth) {
         player.x += game.speed * game.movingMultiplier;
-        wizard.style.left = player.x + 'px';
     }
 
+    wizard.style.top = player.y + 'px';
+    wizard.style.left = player.x + 'px';
     window.requestAnimationFrame(gameAction);
 }
 
