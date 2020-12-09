@@ -36,15 +36,18 @@ function gameAction() {
     }
 
     if (keys.ArrowDown) {
-
+        player.y += game.speed;
+        wizard.style.top = player.y + 'px';
     }
 
     if (keys.ArrowLeft) {
-
+        player.x -= game.speed;
+        wizard.style.left = player.x + 'px';
     }
 
     if (keys.ArrowRight) {
-
+        player.x += game.speed;
+        wizard.style.left = player.x + 'px';
     }
 
     window.requestAnimationFrame(gameAction);
