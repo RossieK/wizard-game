@@ -16,6 +16,12 @@ function onGameStart() {
     wizard.style.top = '200px';
     wizard.style.left = '300px';
     gameArea.appendChild(wizard);
+
+    window.requestAnimationFrame(gameAction);
+}
+
+function gameAction() {
+    window.requestAnimationFrame(gameAction);
 }
 
 function onKeyDown(e) {
