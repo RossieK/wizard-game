@@ -34,6 +34,7 @@ body {
 }
 
 .wizard {
+    z-index: 100;
     position: absolute;
     width: 82px;
     height: 100px;
@@ -42,6 +43,7 @@ body {
 }
 
 .wizard-fire {
+    z-index: 100;
     background-image: url(./images/wizard-fire.png);
     background-size: cover;
 }
@@ -60,4 +62,13 @@ body {
     position: absolute;
     width: 200px;
     height: 200px;
+    z-index: 0;
+}
+
+.bug {
+    background-image: url(./images/bug.png);
+    background-size: cover;
+    position: absolute;
+    width: 60px;
+    height: 60px;
 }
