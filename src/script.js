@@ -11,7 +11,7 @@ document.addEventListener('keyup', onKeyUp);
 let keys = {};
 let player = {
     x: 150,
-    y: 300,
+    y: 150,
     width: 0,
     height: 0
 };
@@ -62,6 +62,13 @@ function gameAction() {
     if (keys.ArrowRight && player.x + player.width < gameArea.offsetWidth) {
         player.x += game.speed * game.movingMultiplier;
     }
+
+    if (keys.Space) {
+        wizard.classList.add('wizard-fire');
+    } else {
+        wizard.classList.remove('wizard-fire');
+    }
+
 
     //apply movement
     wizard.style.top = player.y + 'px';
