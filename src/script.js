@@ -21,7 +21,7 @@ let game = {
     movingMultiplier: 4,
     fireballMultiplier: 5,
     fireInterval: 1000,
-    cloudSpawnInterval: 5000
+    cloudSpawnInterval: 2000
 };
 let scene = {
     score: 0,
@@ -52,12 +52,12 @@ function gameAction(timestamp) {
     scene.score++;
 
     //add clouds
-    if (timestamp - scene.lastCloudSpawn > game.cloudSpawnInterval) {
+    if (timestamp - scene.lastCloudSpawn > game.cloudSpawnInterval + 20000 * Math.random()) {
         let cloud = document.createElement('div');
         cloud.classList.add('cloud');
         cloud.x = gameArea.offsetWidth - 200;
         cloud.style.left = cloud.x + 'px';
-        cloud.style.top = '100px';
+        cloud.style.top = (gameArea.offsetHeight - 200) * Math.random() + 'px';
 
         gameArea.appendChild(cloud);
         scene.lastCloudSpawn = timestamp;
