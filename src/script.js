@@ -13,12 +13,14 @@ let player = {
     x: 150,
     y: 150,
     width: 0,
-    height: 0
+    height: 0,
+    lastTimeFiredBall: 0
 };
 let game = {
     speed: 2,
     movingMultiplier: 4,
-    fireballMultiplier: 5
+    fireballMultiplier: 5,
+    fireInterval: 1000
 };
 let scene = {
     score: 0
@@ -36,7 +38,7 @@ function onGameStart() {
     window.requestAnimationFrame(gameAction);
 }
 
-function gameAction() {
+function gameAction(timestamp) {
     const wizard = document.querySelector('.wizard');
 
     //apply gravitation
@@ -75,11 +77,12 @@ function gameAction() {
         player.x += game.speed * game.movingMultiplier;
     }
 
-    if (keys.Space) {
+    if (keys.Space && timestamp - player.lastTimeFiredBall > game.fireInterval) {
         wizard.classList.add('wizard-fire');
 
         // add fireball
         addFireball(player);
+        player.lastTimeFiredBall = timestamp;
 
     } else {
         wizard.classList.remove('wizard-fire');
