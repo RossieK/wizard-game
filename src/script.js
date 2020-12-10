@@ -20,10 +20,12 @@ let game = {
     speed: 2,
     movingMultiplier: 4,
     fireballMultiplier: 5,
-    fireInterval: 1000
+    fireInterval: 1000,
+    cloudSpawnInterval: 5000
 };
 let scene = {
-    score: 0
+    score: 0,
+    lastCloudSpawn: 0
 }
 
 function onGameStart() {
@@ -49,7 +51,30 @@ function gameAction(timestamp) {
 
     scene.score++;
 
-    //Modify fireballs position
+    //add clouds
+    if (timestamp - scene.lastCloudSpawn > game.cloudSpawnInterval) {
+        let cloud = document.createElement('div');
+        cloud.classList.add('cloud');
+        cloud.x = gameArea.offsetWidth - 200;
+        cloud.style.left = cloud.x + 'px';
+        cloud.style.top = '100px';
+
+        gameArea.appendChild(cloud);
+        scene.lastCloudSpawn = timestamp;
+    }
+
+    //modify clouds position
+    let clouds = document.querySelectorAll('.cloud');
+    clouds.forEach(cloud => {
+        cloud.x -= game.speed;
+        cloud.style.left = cloud.x + 'px';
+
+        if (cloud.x + cloud.offsetWidth <= 0) {
+            cloud.parentElement.removeChild(cloud);
+        }
+    });
+
+    //modify fireballs position
     let fireballs = document.querySelectorAll('.fireball');
     fireballs.forEach(fireball => {
         fireball.x += game.speed * game.fireballMultiplier;
