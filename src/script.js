@@ -51,6 +51,10 @@ function gameAction() {
     fireballs.forEach(fireball => {
         fireball.x += game.speed;
         fireball.style.left = fireball.x + 'px';
+
+        if (fireball.x + fireball.offsetWidth > gameArea.offsetWidth) {
+            fireball.parentElement.removeChild(fireball);
+        }
     });
 
     // register user input 
