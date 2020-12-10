@@ -17,7 +17,8 @@ let player = {
 };
 let game = {
     speed: 2,
-    movingMultiplier: 4
+    movingMultiplier: 4,
+    fireballMultiplier: 5
 };
 let scene = {
     score: 0
@@ -49,7 +50,7 @@ function gameAction() {
     //Modify fireballs position
     let fireballs = document.querySelectorAll('.fireball');
     fireballs.forEach(fireball => {
-        fireball.x += game.speed;
+        fireball.x += game.speed * game.fireballMultiplier;
         fireball.style.left = fireball.x + 'px';
 
         if (fireball.x + fireball.offsetWidth > gameArea.offsetWidth) {
