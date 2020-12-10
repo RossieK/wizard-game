@@ -46,6 +46,13 @@ function gameAction() {
 
     scene.score++;
 
+    //Modify fireballs position
+    let fireballs = document.querySelectorAll('.fireball');
+    fireballs.forEach(fireball => {
+        fireball.x += game.speed;
+        fireball.style.left = fireball.x + 'px';
+    });
+
     // register user input 
     if (keys.ArrowUp && player.y > 0) {
         player.y -= game.speed * game.movingMultiplier;
@@ -65,6 +72,10 @@ function gameAction() {
 
     if (keys.Space) {
         wizard.classList.add('wizard-fire');
+
+        // add fireball
+        addFireball(player);
+
     } else {
         wizard.classList.remove('wizard-fire');
     }
@@ -80,6 +91,17 @@ function gameAction() {
 
 
     window.requestAnimationFrame(gameAction);
+}
+
+function addFireball(player) {
+    let fireball = document.createElement('div');
+
+    fireball.classList.add('fireball');
+    fireball.style.top = (player.y + player.height / 3 - 5) + 'px';
+    fireball.x = player.x + player.width;
+    fireball.style.left = fireball.x + 'px';
+
+    gameArea.appendChild(fireball);
 }
 
 function onKeyDown(e) {
