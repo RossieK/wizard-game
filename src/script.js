@@ -22,7 +22,8 @@ let game = {
     fireballMultiplier: 5,
     fireInterval: 1000,
     cloudSpawnInterval: 3000,
-    bugSpawnInterval: 2000
+    bugSpawnInterval: 2000,
+    bugKillBonus: 2000
 };
 let scene = {
     score: 0,
@@ -144,6 +145,14 @@ function gameAction(timestamp) {
         if (isCollision(wizard, bug)) {
             gameOverAction();
         };
+
+        fireballs.forEach(fireball => {
+            if (isCollision(fireball, bug)) {
+                scene.score += game.bugKillBonus;
+                bug.parentElement.removeChild(bug);
+                fireball.parentElement.removeChild(fireball);
+            }
+        })
     });
 
     //apply movement
