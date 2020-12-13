@@ -23,7 +23,7 @@ function onGameStart() {
 const frame = t1 => t2 => {
     if (t2 - t1 > game.frameLength) {
         gameAction(t2);
-        scene.isActiveGame && window.requestAnimationFrame(frame(t2));
+        state.scene.isActiveGame && window.requestAnimationFrame(frame(t2));
     } else {
         window.requestAnimationFrame(frame(t1));
     }
@@ -38,10 +38,10 @@ function gameAction(timestamp) {
         state.player.y += game.speed;
     }
 
-    scene.score++;
+    state.scene.score++;
 
     //add bugs
-    if (timestamp - scene.lastBugSpawn > game.bugSpawnInterval + 5000 * Math.random()) {
+    if (timestamp - state.scene.lastBugSpawn > game.bugSpawnInterval + 5000 * Math.random()) {
         let bug = document.createElement('div');
         bug.classList.add('bug');
         bug.x = gameArea.offsetWidth - 60;
@@ -49,11 +49,11 @@ function gameAction(timestamp) {
         bug.style.top = (gameArea.offsetHeight - 60) * Math.random() + 'px';
 
         gameArea.appendChild(bug);
-        scene.lastBugSpawn = timestamp;
+        state.scene.lastBugSpawn = timestamp;
     }
 
     //add clouds
-    if (timestamp - scene.lastCloudSpawn > game.cloudSpawnInterval + 20000 * Math.random()) {
+    if (timestamp - state.scene.lastCloudSpawn > game.cloudSpawnInterval + 20000 * Math.random()) {
         let cloud = document.createElement('div');
         cloud.classList.add('cloud');
         cloud.x = gameArea.offsetWidth - 200;
@@ -61,7 +61,7 @@ function gameAction(timestamp) {
         cloud.style.top = (gameArea.offsetHeight - 200) * Math.random() + 'px';
 
         gameArea.appendChild(cloud);
-        scene.lastCloudSpawn = timestamp;
+        state.scene.lastCloudSpawn = timestamp;
     }
 
     //modify bugs position
@@ -118,7 +118,7 @@ function gameAction(timestamp) {
         wizard.classList.add('wizard-fire');
 
         // add fireball
-        addFireball(player);
+        addFireball(state.player);
         state.player.lastTimeFiredBall = timestamp;
 
     } else {
@@ -133,7 +133,7 @@ function gameAction(timestamp) {
 
         fireballs.forEach(fireball => {
             if (isCollision(fireball, bug)) {
-                scene.score += game.bugKillBonus;
+                state.score += game.bugKillBonus;
                 bug.parentElement.removeChild(bug);
                 fireball.parentElement.removeChild(fireball);
             }
@@ -146,5 +146,5 @@ function gameAction(timestamp) {
 
 
     //apply score
-    gamePoints.textContent = scene.score;
+    gamePoints.textContent = state.scene.score;
 }

@@ -1,12 +1,5 @@
 let keys = {};
 
-let scene = {
-    score: 0,
-    lastCloudSpawn: 0,
-    lastBugSpawn: 0,
-    isActiveGame: true
-}
-
 let state = {
     player: {
         x: 150,
@@ -14,6 +7,12 @@ let state = {
         width: 0,
         height: 0,
         lastTimeFiredBall: 0
+    },
+    scene: {
+        score: 0,
+        lastCloudSpawn: 0,
+        lastBugSpawn: 0,
+        isActiveGame: true
     }
 }
 
@@ -26,7 +25,7 @@ function isCollision(firstEl, secondEl) {
 }
 
 function gameOverAction() {
-    scene.isActiveGame = false;
+    state.scene.isActiveGame = false;
     gameOver.classList.remove('hide');
 }
 
