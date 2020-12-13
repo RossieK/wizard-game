@@ -138,6 +138,12 @@ function gameAction(timestamp) {
         wizard.classList.remove('wizard-fire');
     }
 
+    //Collision detection
+    bugs.forEach(bug => {
+        if (isCollision(wizard, bug)) {
+
+        };
+    });
 
     //apply movement
     wizard.style.top = player.y + 'px';
@@ -149,6 +155,13 @@ function gameAction(timestamp) {
 
 
     window.requestAnimationFrame(gameAction);
+}
+
+function isCollision(firstEl, secondEl) {
+    let firstRect = firstEl.getBoundingClientRect();
+    let secondRect = secondEl.getBoundingClientRect();
+
+    return firstRect.top > secondRect.bottom || firstRect.bottom < secondRect.top || firstRect.right < secondRect.left || firstRect.left > secondRect.right;
 }
 
 function addFireball(player) {
