@@ -27,7 +27,8 @@ let game = {
 let scene = {
     score: 0,
     lastCloudSpawn: 0,
-    lastBugSpawn: 0
+    lastBugSpawn: 0,
+    isActiveGame: true
 }
 
 function onGameStart() {
@@ -141,7 +142,7 @@ function gameAction(timestamp) {
     //Collision detection
     bugs.forEach(bug => {
         if (isCollision(wizard, bug)) {
-
+            gameOverAction();
         };
     });
 
@@ -153,15 +154,21 @@ function gameAction(timestamp) {
     //apply score
     gamePoints.textContent = scene.score;
 
-
-    window.requestAnimationFrame(gameAction);
+    if (scene.isActiveGame) {
+        window.requestAnimationFrame(gameAction);
+    }
 }
 
 function isCollision(firstEl, secondEl) {
     let firstRect = firstEl.getBoundingClientRect();
     let secondRect = secondEl.getBoundingClientRect();
 
-    return firstRect.top > secondRect.bottom || firstRect.bottom < secondRect.top || firstRect.right < secondRect.left || firstRect.left > secondRect.right;
+    return !(firstRect.top > secondRect.bottom || firstRect.bottom < secondRect.top || firstRect.right < secondRect.left || firstRect.left > secondRect.right);
+}
+
+function gameOverAction() {
+    scene.isActiveGame = false;
+    gameOver.classList.remove('hide');
 }
 
 function addFireball(player) {
