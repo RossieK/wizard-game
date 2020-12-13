@@ -91,10 +91,11 @@ function gameAction(timestamp, state) {
 
     //modify fireballs position
     let fireballs = document.querySelectorAll('.fireball');
-    fireballs.forEach(fireball => {
-        fireball.x += game.speed * game.fireballMultiplier;
-        fireball.style.left = fireball.x + 'px';
+    state.attacks.forEach(a => {
+        a.el.style.left = a.x + 'px';
+    });
 
+    fireballs.forEach(fireball => {
         if (fireball.x + fireball.offsetWidth > gameArea.offsetWidth) {
             fireball.parentElement.removeChild(fireball);
         }
@@ -121,7 +122,7 @@ function gameAction(timestamp, state) {
         wizard.classList.add('wizard-fire');
 
         // add fireball
-        addFireball(state.player);
+        addFireball(state);
         state.player.lastTimeFiredBall = timestamp;
 
     } else {
