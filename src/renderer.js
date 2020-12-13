@@ -8,7 +8,9 @@ gameStart.addEventListener('click', onGameStart);
 document.addEventListener('keydown', onKeyDown);
 document.addEventListener('keyup', onKeyUp);
 
-let state = initialState();
+let state = initialState({
+    areaWidth: gameArea.offsetWidth
+});
 
 function onGameStart() {
     gameStart.classList.add('hide');
@@ -95,12 +97,6 @@ function gameAction(timestamp, state) {
         a.el.style.left = a.x + 'px';
     });
 
-    fireballs.forEach(fireball => {
-        if (fireball.x + fireball.offsetWidth > gameArea.offsetWidth) {
-            fireball.parentElement.removeChild(fireball);
-        }
-    });
-
     // register user input 
     if (keys.ArrowUp && state.player.y > 0) {
         state.player.y -= game.speed * game.movingMultiplier;
@@ -139,7 +135,7 @@ function gameAction(timestamp, state) {
             if (isCollision(fireball, bug)) {
                 state.score += game.bugKillBonus;
                 bug.parentElement.removeChild(bug);
-                fireball.parentElement.removeChild(fireball);
+                //fireball.parentElement.removeChild(fireball);
             }
         })
     });
