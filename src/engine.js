@@ -1,18 +1,20 @@
 let keys = {};
 
-let player = {
-    x: 150,
-    y: 150,
-    width: 0,
-    height: 0,
-    lastTimeFiredBall: 0
-};
-
 let scene = {
     score: 0,
     lastCloudSpawn: 0,
     lastBugSpawn: 0,
     isActiveGame: true
+}
+
+let state = {
+    player: {
+        x: 150,
+        y: 150,
+        width: 0,
+        height: 0,
+        lastTimeFiredBall: 0
+    }
 }
 
 
@@ -32,8 +34,8 @@ function addFireball(player) {
     let fireball = document.createElement('div');
 
     fireball.classList.add('fireball');
-    fireball.style.top = (player.y + player.height / 3 - 5) + 'px';
-    fireball.x = player.x + player.width;
+    fireball.style.top = (state.player.y + state.player.height / 3 - 5) + 'px';
+    fireball.x = state.player.x + state.player.width;
     fireball.style.left = fireball.x + 'px';
 
     gameArea.appendChild(fireball);
