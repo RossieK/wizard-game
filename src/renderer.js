@@ -38,8 +38,6 @@ function gameAction(timestamp) {
         player.y += game.speed;
     }
 
-    scene.score++;
-
     //add bugs
     if (timestamp - scene.lastBugSpawn > game.bugSpawnInterval + 5000 * Math.random()) {
         let bug = document.createElement('div');
@@ -52,6 +50,18 @@ function gameAction(timestamp) {
         scene.lastBugSpawn = timestamp;
     }
 
+    //modify bugs position
+    let bugs = document.querySelectorAll('.bug');
+    bugs.forEach(bug => {
+        bug.x -= game.speed * 5;
+        bug.style.left = bug.x + 'px';
+
+        if (bug.x + bug.offsetWidth <= 0) {
+            bug.parentElement.removeChild(bug);
+        }
+    });
+
+
     //add clouds
     if (timestamp - scene.lastCloudSpawn > game.cloudSpawnInterval + 20000 * Math.random()) {
         let cloud = document.createElement('div');
@@ -63,17 +73,6 @@ function gameAction(timestamp) {
         gameArea.appendChild(cloud);
         scene.lastCloudSpawn = timestamp;
     }
-
-    //modify bugs position
-    let bugs = document.querySelectorAll('.bug');
-    bugs.forEach(bug => {
-        bug.x -= game.speed * 3;
-        bug.style.left = bug.x + 'px';
-
-        if (bug.x + bug.offsetWidth <= 0) {
-            bug.parentElement.removeChild(bug);
-        }
-    });
 
     //modify clouds position
     let clouds = document.querySelectorAll('.cloud');
@@ -145,6 +144,7 @@ function gameAction(timestamp) {
     wizard.style.left = player.x + 'px';
 
 
-    //apply score
+    //add and apply score
+    scene.score++;
     gamePoints.textContent = scene.score;
 }

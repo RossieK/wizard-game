@@ -5,6 +5,6 @@ let game = {
     fireballMultiplier: 5,
     fireInterval: 1000,
     cloudSpawnInterval: 3000,
-    bugSpawnInterval: 2000,
+    bugSpawnInterval: 500,
     bugKillBonus: 2000
 };
