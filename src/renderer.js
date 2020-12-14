@@ -3,6 +3,7 @@ const gameArea = document.querySelector('.game-area');
 const gameOver = document.querySelector('.game-over');
 const gameScore = document.querySelector('.game-score');
 const gamePoints = gameScore.querySelector('.points');
+const gameOverPoints = gameOver.querySelector('.gameOverPoints');
 
 gameStart.addEventListener('click', onGameStart);
 document.addEventListener('keydown', onKeyDown);

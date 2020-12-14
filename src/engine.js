@@ -25,6 +25,7 @@ function isCollision(firstEl, secondEl) {
 
 function gameOverAction() {
     scene.isActiveGame = false;
+    gameOverPoints.textContent = Number(gamePoints.textContent) + 1 + " points earned";
     gameOver.classList.remove('hide');
 }
 

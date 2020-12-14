@@ -1,7 +1,7 @@
 let game = {
     speed: 2,
     frameLength: 30,
-    movingMultiplier: 4,
+    movingMultiplier: 5,
     fireballMultiplier: 5,
     fireInterval: 500,
     cloudSpawnInterval: 4000,
