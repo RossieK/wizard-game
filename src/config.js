@@ -3,8 +3,8 @@ let game = {
     frameLength: 30,
     movingMultiplier: 4,
     fireballMultiplier: 5,
-    fireInterval: 1000,
-    cloudSpawnInterval: 3000,
+    fireInterval: 500,
+    cloudSpawnInterval: 4000,
     bugSpawnInterval: 500,
     bugKillBonus: 2000
 };

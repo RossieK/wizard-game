@@ -61,7 +61,6 @@ function gameAction(timestamp) {
         }
     });
 
-
     //add clouds
     if (timestamp - scene.lastCloudSpawn > game.cloudSpawnInterval + 20000 * Math.random()) {
         let cloud = document.createElement('div');
